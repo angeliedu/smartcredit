@@ -1,0 +1,20 @@
+
+runtime: python39  # Replace with the Python version you are using
+
+# App Engine fully manages the hardware and networking infrastructure required to run your code.
+# The handlers section defines how URL paths correspond to request handlers and static files.
+handlers:
+- url: /.*
+  script: auto
+
+# You can define environment variables here, if you need them.
+env_variables:
+  FLASK_ENV: 'production'
+  SECRET_KEY: 'your-secret-key'  # Replace with your actual secret key
+
+# Instance class and automatic scaling configurations can be set here as well.
+# instance_class: F1
+# automatic_scaling:
+#   target_cpu_utilization: 0.65
+#   min_instances: 1
+#   max_instances: 5
