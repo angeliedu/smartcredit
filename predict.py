@@ -134,6 +134,6 @@ DTI: {dti*100:.2f}%
 Employment Length: {emp_length}
 
 Prediction: Loan REJECTED""")
-
+        
 # Calling the function
 generate_random_user_predict(classifier, X_train, scaler)
