@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/eduardoangeli/Documents/GitHub/smartcredit/mlruns/0/9f3fadad14074085a4989dd51b75c23a/artifacts
+end_time: 1700310063483
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 9f3fadad14074085a4989dd51b75c23a
+run_name: tasteful-mule-970
+run_uuid: 9f3fadad14074085a4989dd51b75c23a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1700310063473
+status: 3
+tags: []
+user_id: eduardoangeli

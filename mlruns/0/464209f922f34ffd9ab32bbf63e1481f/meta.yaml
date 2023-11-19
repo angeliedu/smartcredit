@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/eduardoangeli/Documents/GitHub/smartcredit/mlruns/0/464209f922f34ffd9ab32bbf63e1481f/artifacts
+end_time: 1700309272192
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 464209f922f34ffd9ab32bbf63e1481f
+run_name: fun-steed-149
+run_uuid: 464209f922f34ffd9ab32bbf63e1481f
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1700309272095
+status: 4
+tags: []
+user_id: eduardoangeli

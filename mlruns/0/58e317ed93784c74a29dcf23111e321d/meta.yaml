@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/eduardoangeli/Documents/GitHub/smartcredit/mlruns/0/58e317ed93784c74a29dcf23111e321d/artifacts
+end_time: 1700309600642
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 58e317ed93784c74a29dcf23111e321d
+run_name: bold-rook-144
+run_uuid: 58e317ed93784c74a29dcf23111e321d
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1700309600638
+status: 4
+tags: []
+user_id: eduardoangeli
