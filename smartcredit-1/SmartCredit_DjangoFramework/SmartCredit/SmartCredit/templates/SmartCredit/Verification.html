@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>verification</title>
+    <link rel="stylesheet" href="static/CSS/verify.css"> 
+    <script src="SmartCredit/static/JS/verify.js"></script> 
+    <style>
+        body{
+            background-color: #05637f;
+        }
+        #wrapper {
+            font-family: Lato;
+            font-size: 1.5rem;
+            text-align: center;
+            box-sizing: border-box;
+            color: #333;
+            width : 100%;
+        }
+        
+        #dialog {
+            border: solid 1px #ccc;
+            margin: 10px auto;
+            padding: 20px 30px;
+            display: inline-block;
+            box-shadow: 0 0 4px #ccc;
+            background-color: #FAF8F8;
+            overflow: hidden;
+            position: relative;
+            max-width: 900px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        #dialog h3 {
+            margin: 0 0 10px;
+            padding: 0;
+            line-height: 1.25;
+        }
+        
+        #dialog span {
+            font-size: 90%;
+        }
+        
+        #dialog #form {
+            max-width: 300px;
+            padding:20px;
+            margin: auto  ;
+            align-items: center;
+
+        }
+        .verify_box{
+            display: flex;
+            align-items: center;
+        }
+        #dialog input {
+            margin: 0 5px;
+            text-align: center;
+            line-height: 80px;
+            font-size: 50px;
+            border: solid 1px #ccc;
+            box-shadow: 0 0 5px #ccc inset;
+            outline: none;
+            width: 50px;
+            height: 40px;
+            transition: all 0.2s ease-in-out;
+            border-radius: 3px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        #dialog input:focus {
+            border-color: #05637f;
+            box-shadow: 0 0 5px #05637f;
+        }
+        
+        #dialog input::selection {
+            background: transparent;
+        }
+        
+        #dialog button {
+            width: auto; /* Let the button adjust to its content */
+            padding: 8px 20px; /* Adjust the padding for the button size */
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            background-color: #05637f;
+            color: white;
+            cursor: pointer;
+            display: block; /* Display as a block element to center it */
+            margin: 25px auto; /* Center horizontally */
+        }
+        #dialog button:hover, #dialog button:active {
+            background-color: #0a5d8c;
+        }
+        #dialog div {
+            position: relative;
+            z-index: 1;
+        }
+        
+        #dialog img {
+            position: absolute;
+            bottom: -70px;
+            right: -63px;
+        }
+        .card-header{
+            color: #05637f;
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="dialog">
+            <h3 class="card-header">Verify</h3>
+            <span class="card-header">( Check your email or phone for a verification message and enter the code to activate your account)</span>
+            <input type="hidden" id="verification_code" value="{{ verification_code }}">
+            <div id="form">
+                {% csrf_token %}
+               <!-- Add this inside the form tag -->
+                <div class="verify_box">
+                    <input type="text" id="code1" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
+                    <input type="text" id="code2" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
+                    <input type="text" id="code3" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
+                    <input type="text" id="code4" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
+                    <input type="text" id="code5" maxlength="1" size="1" min="0" max="9" pattern="[0-9]{1}" />
+                </div>
+
+                <button class="btn btn-primary btn-embossed verify_button">Verify</button>
+                <!-- ... your HTML code ... -->
+                <script>
+                    document.querySelector('.verify_button').addEventListener('click', function () {
+                        // Get the entered verification code from the input fields
+                        const code1 = document.getElementById('code1').value;
+                        const code2 = document.getElementById('code2').value;
+                        const code3 = document.getElementById('code3').value;
+                        const code4 = document.getElementById('code4').value;
+                        const code5 = document.getElementById('code5').value;
+                        const enteredCode = code1 + code2 + code3 + code4 + code5;
+                
+                        // Get the verification code sent from the server
+                        const serverVerificationCode = "{{ verification_code }}";
+                        
+                        // Log the values to the console for debugging
+                        console.log("Entered Code: " + enteredCode);
+                        console.log("Server Code: " + serverVerificationCode);
+                
+                        // Create a FormData object to send the data to the server
+                        const formData = new FormData();
+                        formData.append('entered_code', enteredCode);
+                        formData.append('server_code', serverVerificationCode);
+                
+                        // Send the entered code to the server for validation
+                        fetch('/verify_verification_code/', {
+                            method: 'POST',
+                            body: formData,
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.valid) {
+                                // Verification successful, show alert and redirect to the login page
+                                alert("Your email is verified.");
+                                window.location.href = "/login/";  // Use the correct URL for the login page
+                            } else {
+                                // Verification failed
+                                alert("Verification code is incorrect.");
+                            }
+                        });
+                    });
+                </script>
+                
+                
+            </div>
+            
+            <div>
+                Didn't receive the code?<br />
+                <a href="#">Send code again</a><br />
+            </div>
+            <img src="http://jira.moovooz.com/secure/attachment/10424/VmVyaWZpY2F0aW9uLnN2Zw==" alt="test" />
+        </div>
+    </div>
+</body>
+</html>
