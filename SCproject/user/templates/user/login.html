@@ -1,0 +1,82 @@
+
+{% load crispy_forms_tags %}
+{% block start %}
+
+<style>
+    body {
+        background-color: #DCE7E0;
+        margin: 0; /* Remove default body margin */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh; /* Set body height to full viewport height */
+    }
+    .card-heading {
+        color: #05637f;
+    }
+    .login-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 80%;
+        width: 450px;
+        height: 450px;
+        border: 2px solid #46aef3;
+        border-radius: 10px;
+        box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.2);
+        background-color: white;
+        padding: 20px;
+    }
+    
+    input[type=text], input[type=password] {
+        width: calc(100% - 20px);
+        padding: 10px;
+        margin-bottom: 10px;
+        font-size: 16px;
+        border-radius: 10px;
+        border: 2px solid #eceff3;
+        outline: none;
+        box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.2);
+    }
+    
+    button[type=submit] {
+        width: 50%;
+        padding: 10px;
+        font-size: 14px;
+        border-radius: 5px;
+        border: none;
+        background-color: #05637f;
+        color: white;
+        cursor: pointer;
+        box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.2);
+        margin-top: 20px;
+    }
+    
+    button[type=submit]:hover {
+        background-color: #04495e;
+    }
+    .signupPage {
+        text-align: center;
+        margin-top: 20px;
+    }
+    .form-group{
+        border: none;
+    }
+</style>
+
+<div class="content-section">
+    <form method="POST" class="login-card">
+        {% csrf_token %}
+        <fieldset class="form-group"style="border: none;">
+            {{ form|crispy}}
+        </fieldset>
+        <button class="btn btn-outline-info" type="submit"><span class="glyphicon glyphicon-log-in"></span> Login</button>
+        <div class="signupPage">
+            <a href="{% url 'register' %}" style="text-decoration: none; color: blue;">
+                Don't have an account? Sign up
+            </a>
+        </div>
+    </form>
+</div>
+
+{% endblock start %}
